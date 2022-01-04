@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>疫情查询</title>
+</head>
+<body>
+<p>疫情数据查询</p>
+<table>
+    <tr>
+        <td>省份,城市</td>
+        <td><input type="text " id="address"></td>
+    </tr>
+    <tr>
+        <td>日期</td>
+        <td><input type="text" id="date"></td>
+    </tr>
+    <tr>
+        <td><input type="button" value="查询" onclick="doSearch()"></td>
+    </tr>
+    <tr>
+        <td>新增无症状</td>
+        <td><input type="text" id="no_state"></td>
+    </tr>
+    <tr>
+        <td>新增本土</td>
+        <td><input type="text" id="local"></td>
+    </tr>
+
+</table>
+<script type="text/javascript">
+    function doSearch() {
+        //创建异步对象
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+
+                var data = xmlHttp.responseText;
+
+                var jsonObj = eval("(" + data + ")");
+                document.getElementById("no_state").value = jsonObj.no_state_new;
+                document.getElementById("local").value = jsonObj.local_new;
+            }
+        }
+        var address = document.getElementById("address").value;
+        var date = document.getElementById("date").value;
+        //Todo
+        xmlHttp.open("get", "pachong?date=" + date + "&address=" + encodeURIComponent(address), true)
+        xmlHttp.send();
+    }
+
+</script>
+</body>
+</html>
