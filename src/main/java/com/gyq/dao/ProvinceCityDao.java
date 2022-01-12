@@ -32,13 +32,7 @@ public class ProvinceCityDao {
                 String pname = rs.getString("pname");
                 String cname = rs.getString("cname");
                 cityList.add(pname + "-" + cname);
-                int index = 1;
-                while (index<=cityList.size()){
-                    index++;
-
-                }
-                System.out.println("全国的城市共有"+index+"个");
-
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
